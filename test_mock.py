@@ -9,8 +9,8 @@ class TestMockSendEmail(unittest.TestCase):
     class HelloDummy:
         def hello(self):
             return 'hello dummy'
-    
-    #mock call with parameter
+        #mock call with parameter
+
     def test_mock(self):
         real = EmailSending()
         real.send_message = Mock()
