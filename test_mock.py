@@ -10,15 +10,14 @@ class TestMockSendEmail(unittest.TestCase):
         def hello(self):
             return 'hello dummy'
     
-    #mock
+    #mock call with parameter
     def test_mock(self):
         real = EmailSending()
         real.send_message = Mock()
         real.say_in_email('natty', 'yoyo')
-        self.assertEqual(real.send_message.called, True)
-        self.assertEqual(real.send_message.call_count, 1)
+        real.send_message.assert_called_once_with('yoyo','Ah hello natty. You are hello natty')
 
-    #spy
+    #spy record something
     def test_spy(self):
         real = EmailSending()
         real.send_message = Mock()
@@ -26,6 +25,7 @@ class TestMockSendEmail(unittest.TestCase):
         real.hello.return_value = 'hello mock' 
         message = real.say_in_email('Natty', 'natty@natty.com')
         self.assertEqual(real.send_message.called, True)
+        self.assertEqual(real.send_message.call_count, 1)
         self.assertEqual(message, 'Ah hello mock. You are hello mock')
         self.assertEqual(real.hello.call_count, 2)
 
