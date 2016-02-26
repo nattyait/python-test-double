@@ -2,7 +2,7 @@ import socket
 import smtplib
 
 
-class EmailSending:
+class EmailSender:
     def send_message(self, users, message):
         try:
             smtpobj = smtplib.SMTP('localhost', 1025)
