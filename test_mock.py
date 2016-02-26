@@ -5,12 +5,6 @@ from mock import Mock, patch, call
 
 
 class TestMockSendEmail(unittest.TestCase):
-
-    class HelloDummy:
-        def hello(self):
-            return 'hello dummy'
-        #mock call with parameter
-
     def test_mock(self):
         real = EmailSending()
         real.send_message = Mock()
@@ -22,21 +16,12 @@ class TestMockSendEmail(unittest.TestCase):
         real = EmailSending()
         real.send_message = Mock()
         real.hello = Mock()
-        real.hello.return_value = 'hello mock' 
+        real.hello.return_value = 'hello mock'
         message = real.say_in_email('Natty', 'natty@natty.com')
         self.assertEqual(real.send_message.called, True)
         self.assertEqual(real.send_message.call_count, 1)
         self.assertEqual(message, 'Ah hello mock. You are hello mock')
         self.assertEqual(real.hello.call_count, 2)
-
-    #dummy
-    def test_dummy(self):
-        real = EmailSending()
-        real.send_message = Mock()
-        real.hello = Mock()
-        real.hello.return_value = self.HelloDummy().hello()
-        message = real.say_in_email('Natty', 'natty@natty.com')
-        self.assertEqual(message, 'Ah hello dummy. You are hello dummy')
 
     #stub
     def test_stub(self):
